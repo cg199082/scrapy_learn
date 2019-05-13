@@ -9,11 +9,19 @@ def parseDate(date):
 #普通字符串截取
 def strTrans(str, target):
     index = str.index(target)
-    return str[0:index]
+    if index > 0 :
+        return str[0:index]
+    else:
+        return str
 
 #两位小数点数据升级int
 def intTrans(str, target):
     if len(target) >0:
-        str = strTrans(str, target)
+        str = str.replace("+", "")
+        str = str.replace(target, "")
     orign = float(str) * 100
     return math.ceil(orign)
+
+print(intTrans("-3.63%", "%"))
+print(intTrans("+3.63%", "%"))
+print(intTrans("0", "%"))

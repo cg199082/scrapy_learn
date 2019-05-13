@@ -8,6 +8,14 @@
 import scrapy
 
 
+class HouseRent(scrapy.Item):
+    # 上海各区域小区租房价格
+    
+    community = scrapy.Field()   #小区
+    region = scrapy.Field()   #行政区
+    rent = scrapy.Field()  #租金
+    ratio = scrapy.Field()  #环比上月
+
 class FundItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()

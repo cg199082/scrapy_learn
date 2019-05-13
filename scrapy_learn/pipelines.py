@@ -11,7 +11,20 @@ import pymongo
 
 class ScrapyLearnPipeline(object):
     def __init__(self):
-        self.fund = open("F:/git-repo/scrapy_learn/scrapy_learn/data/fund.json", "wb")
+        self.client = pymongo.MongoClient(host='10.100.17.215', port=27017)
+        tdb = self.client['tuandai']
+        self.hourseRent = tdb['hourseRent']
+    def process_item(self, item, spider):
+        stokInfo = dict(item)
+        self.hourseRent.insert(stokInfo)
+        return item
+    def close_spider(self, spider):
+        self.client.close()
+
+
+'''
+    def __init__(self):
+        self.fund = open("F:/git-repo/scrapy_learn/scrapy_learn/data/houseRent.json", "wb")
         self.client = pymongo.MongoClient(host='10.100.97.88', port=27017)
         tdb = self.client['tuandai']
         self.stock = tdb['stock']
@@ -27,4 +40,4 @@ class ScrapyLearnPipeline(object):
     def close_spider(self, spider):
         self.fund.close()
         self.client.close()
-        
+'''     
